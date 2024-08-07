@@ -1,29 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Provider } from 'react-redux';
+import store from './components/Redux/store';
 import RegistrationForm from './components/Register/RegistrationForm';
 import LoginForm from './components/Login/LoginForm';
-import './components/Styles/RegistrationForm.css';
+import "../src/components/Styles/RegistrationForm.css"
 
 function App() {
+  const [isRegistering, setIsRegistering] = useState(true);
+
   return (
-    <Router>
+    <Provider store={store}>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/register">Регистрация</Link>
-            </li>
-            <li>
-              <Link to="/login">Авторизация</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/login" element={<LoginForm />} />
-        </Routes>
+        <button onClick={() => setIsRegistering(!isRegistering)}>
+          {isRegistering ? 'Перейти к авторизации' : 'Перейти к регистрации'}
+        </button>
+        {isRegistering ? <RegistrationForm /> : <LoginForm />}
       </div>
-    </Router>
+    </Provider>
   );
 }
 
