@@ -1,22 +1,44 @@
-import React, { useState } from 'react';
-import { Provider } from 'react-redux';
-import store from './components/Redux/store';
-import RegistrationForm from './components/Register/RegistrationForm';
-import LoginForm from './components/Login/LoginForm';
-import "../src/components/Styles/RegistrationForm.css"
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Register from './components/Register/RegistrationForm';
+import Login from './components/Login/LoginForm';
+import { login, logout } from './components/Redux/store';
 
 function App() {
-  const [isRegistering, setIsRegistering] = useState(true);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
+  const handleRegister = (data) => {
+    dispatch(login(data));
+  };
+
+  const handleLogin = (data) => {
+    if (user && user.username === data.username && user.password === data.password) {
+      dispatch(login(user));
+    } else {
+      alert("Invalid credentials");
+    }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
-    <Provider store={store}>
-      <div className="App">
-        <button onClick={() => setIsRegistering(!isRegistering)}>
-          {isRegistering ? 'Перейти к авторизации' : 'Перейти к регистрации'}
-        </button>
-        {isRegistering ? <RegistrationForm /> : <LoginForm />}
-      </div>
-    </Provider>
+    <div className="App">
+      {!isAuthenticated ? (
+        <>
+          <Register onRegister={handleRegister} />
+          <Login onLogin={handleLogin} />
+        </>
+      ) : (
+        <div>
+          <h2>Добро пожаловать, {user.username}!</h2>
+          <button class="styled-button"  onClick={handleLogout}>Выйти</button>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -1,32 +1,29 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { login } from '../Redux/store';
-import '../Styles/RegistrationForm.css';
+import '../Styles/Form.css';
 
-const LoginForm = () => {
-  const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-
+const Login = ({ onLogin }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
-    dispatch(login(data));
-    console.log('Login Data:', data);
+    onLogin(data);
   };
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <h2>Авторизация</h2>
       <label>
         Имя пользователя:
-        <input type="text" {...register('username')} required />
+        <input {...register('username', { required: true })} />
+        {errors.username && <span>Это поле обязательно</span>}
       </label>
       <label>
-        Email:
-        <input type="email" {...register('email')} required />
+        Пароль:
+        <input type="password" {...register('password', { required: true })} />
+        {errors.password && <span>Это поле обязательно</span>}
       </label>
       <button type="submit">Войти</button>
     </form>
   );
 };
 
-export default LoginForm;
+export default Login;
