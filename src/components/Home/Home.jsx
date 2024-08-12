@@ -13,6 +13,7 @@ const Home = () => {
         <button>Авторизация</button>
       </Link>
     </div>
+    
   );
 };
 

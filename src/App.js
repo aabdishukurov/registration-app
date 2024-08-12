@@ -5,6 +5,7 @@ import store, { logout } from './components/Redux/store';
 import Home from './components/Home/Home';
 import Registration from './components/Register/RegistrationForm';
 import Login from './components/Login/LoginForm';
+import "./components/Styles/Form.css"
 
 function App() {
   const dispatch = useDispatch();
@@ -13,10 +14,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <nav>
-          {/* <Link to="/">Главная</Link> */}
-          {/* <Link to="/register">Регистрация</Link> */}
-          {/* <Link to="/login">Авторизация</Link> */}
-          <button onClick={() => dispatch(logout())}>Выйти</button>
+          <Link class="distance" to="/">Главная</Link>
+          <Link class="distance_2" to="/register">Регистрация</Link> 
+          <Link class="distance" to="/login">Авторизация</Link> 
+          <button class="distance" onClick={() => dispatch(logout())}>Выйти</button>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
