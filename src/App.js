@@ -15,7 +15,7 @@ function App() {
       <Router>
         <nav>
           <Link class="distance" to="/">Главная</Link>
-          <Link class="distance_2" to="/register">Регистрация</Link> 
+          <Link class="distance" to="/register">Регистрация</Link> 
           <Link class="distance" to="/login">Авторизация</Link> 
           <button class="distance" onClick={() => dispatch(logout())}>Выйти</button>
         </nav>
