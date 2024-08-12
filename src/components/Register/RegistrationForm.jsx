@@ -1,38 +1,43 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { register } from '../Redux/store';
 import '../Styles/Form.css';
 
-const Register = ({ onRegister }) => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+const Registration = () => {
+  const { register: formRegister, handleSubmit, formState: { errors } } = useForm();
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
     if (data.password === data.confirmPassword) {
-      onRegister(data);
+      dispatch(register({ username: data.username, email: data.email, password: data.password }));
+      alert('Регистрация успешна!');
     } else {
-      alert("Passwords do not match");  
+      alert('Пароли не совпадают');
     }
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
       <h2>Регистрация</h2>
       <label>
         Имя пользователя:
-        <input {...register('username', { required: true })} />
+        <input {...formRegister('username', { required: true })} />
         {errors.username && <span>Это поле обязательно</span>}
       </label>
       <label>
         Email:
-        <input {...register('email', { required: true })} />
+        <input type="email" {...formRegister('email', { required: true })} />
         {errors.email && <span>Это поле обязательно</span>}
       </label>
       <label>
         Пароль:
-        <input type="password" {...register('password', { required: true })} />
+        <input type="password" {...formRegister('password', { required: true })} />
         {errors.password && <span>Это поле обязательно</span>}
       </label>
       <label>
         Подтвердите пароль:
-        <input type="password" {...register('confirmPassword', { required: true })} />
+        <input type="password" {...formRegister('confirmPassword', { required: true })} />
         {errors.confirmPassword && <span>Это поле обязательно</span>}
       </label>
       <button type="submit">Зарегистрироваться</button>
@@ -40,4 +45,4 @@ const Register = ({ onRegister }) => {
   );
 };
 
-export default Register;
+export default Registration;
