@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../Styles/UserCards.css';
+import '../Users/UserCards.css';
 
 const UserCards = () => {
     const [users, setUsers] = useState([]);

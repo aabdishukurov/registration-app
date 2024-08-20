@@ -1,0 +1,22 @@
+.post-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    width: 250px;
+}
+
+.post-card h3 {
+    margin: 0 0 8px;
+}
+
+.post-card p {
+    margin: 4px 0;
+}

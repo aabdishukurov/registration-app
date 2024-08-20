@@ -1,0 +1,22 @@
+.todo-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.todo-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-card h3 {
+    margin-top: 0;
+}
+
+.todo-card p {
+    margin: 0.5rem 0;
+}
