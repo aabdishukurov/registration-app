@@ -6,9 +6,9 @@ const Home = () => {
   return (
     <div className="home">
       <h1>Добро пожаловать!</h1>
-      <Link to="/register">
+      {/* <Link to="/register">
         <button>Регистрация</button>
-      </Link>
+      </Link> */}
       <Link to="/login">
         <button>Авторизация</button>
       </Link>
